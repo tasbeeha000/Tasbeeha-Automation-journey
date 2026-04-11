@@ -20,6 +20,13 @@ test.describe("Login Test", () => {
     await page.getByRole("button", { name: "Login" }).click();
     await expect(page.locator('[data-test="error-button"]')).toBeVisible();
   });
+  test("Empty login", async ({ page }) => {
+    // page is already on saucedemo — no need to goto again!
+    await page.getByPlaceholder("Username").fill("");
+    await page.getByPlaceholder("Password").fill("");
+    await page.getByRole("button", { name: "Login" }).click();
+    await expect(page.locator('[data-test="error-button"]')).toBeVisible();
+  });
 
   test("logout", async ({ page }) => {
     await page.getByPlaceholder("Username").fill("standard_user");
